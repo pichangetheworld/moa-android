@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MoaSample</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="image_placeholder">image</string>
+    <string name="description_placeholder">Some kind of product description</string>
+    <string name="comments_placeholder">Comments...</string>
+</resources>

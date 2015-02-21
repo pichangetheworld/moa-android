@@ -1,16 +1,21 @@
 package com.pichangetheworld.moasample.activity;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TabHost;
 
-import com.pichangetheworld.moasample.fragment.StylesFragment;
 import com.pichangetheworld.moasample.R;
 import com.pichangetheworld.moasample.adapter.PagerAdapter;
+import com.pichangetheworld.moasample.fragment.StylesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,7 @@ import java.util.List;
  * Author: pchan
  * Date: 18/02/2015
  */
-public class MainActivity extends FragmentActivity
+public class MainActivity extends ActionBarActivity
         implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
     private TabHost mTabHost;
     private ViewPager mViewPager;
@@ -71,6 +76,24 @@ public class MainActivity extends FragmentActivity
         }
         // Initialise ViewPager
         this.initialiseViewPager();
+    }
+
+    // Populate Action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        Log.d("MainActivity", "Searching in menu for menuview " +
+                menu.findItem(R.id.action_search).getActionView());
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     /**
@@ -156,8 +179,8 @@ public class MainActivity extends FragmentActivity
     }
 
     /* (non-Javadoc)
-     * @see android.support.v4.view.ViewPager.OnPageChangeListener#onPageScrollStateChanged(int)
-     */
+         * @see android.support.v4.view.ViewPager.OnPageChangeListener#onPageScrollStateChanged(int)
+         */
     @Override
     public void onPageScrollStateChanged(int state) {}
 }

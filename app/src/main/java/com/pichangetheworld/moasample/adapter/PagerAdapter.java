@@ -3,11 +3,13 @@ package com.pichangetheworld.moasample.adapter;
  *
  */
 
-import java.util.List;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import java.util.List;
+
 
 /**
  * The <code>PagerAdapter</code> serves the fragments when paging.

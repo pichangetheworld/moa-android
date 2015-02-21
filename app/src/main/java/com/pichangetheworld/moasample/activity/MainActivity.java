@@ -107,11 +107,11 @@ public class MainActivity extends FragmentActivity
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();
         MainActivity.AddTab(this, this.mTabHost,
-                this.mTabHost.newTabSpec("Tab1").setIndicator("Tab 1"));
+                this.mTabHost.newTabSpec("New").setIndicator("New"));
         MainActivity.AddTab(this, this.mTabHost,
-                this.mTabHost.newTabSpec("Tab2").setIndicator("Tab 2"));
+                this.mTabHost.newTabSpec("Top").setIndicator("Top"));
         MainActivity.AddTab(this, this.mTabHost,
-                this.mTabHost.newTabSpec("Tab3").setIndicator("Tab 3"));
+                this.mTabHost.newTabSpec("Trending").setIndicator("Trending"));
 
         mTabHost.setOnTabChangedListener(this);
     }

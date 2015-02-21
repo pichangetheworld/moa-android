@@ -12,8 +12,8 @@ import com.pichangetheworld.moasample.fragment.StylesFragment;
 import com.pichangetheworld.moasample.R;
 import com.pichangetheworld.moasample.adapter.PagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * MAO
@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity
     private ViewPager mViewPager;
 
     /**
-     * A simple factory that returns dummy views to the Tabhost
+     * A simple factory that returns dummy views to the TabHost
      *
      * @author mwho
      */
@@ -62,13 +62,15 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         // Inflate the layout
         setContentView(R.layout.activity_main);
+
         // Initialise the TabHost
         this.initialiseTabHost();
         if (savedInstanceState != null) {
-            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
+            // Set the tab as per the saved state
+            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
-        // Intialise ViewPager
-        this.intialiseViewPager();
+        // Initialise ViewPager
+        this.initialiseViewPager();
     }
 
     /**
@@ -77,21 +79,22 @@ public class MainActivity extends FragmentActivity
      * @see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
      */
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("tab", mTabHost.getCurrentTabTag()); //save the tab selected
+        // save the current tab selected
+        outState.putString("tab", mTabHost.getCurrentTabTag());
         super.onSaveInstanceState(outState);
     }
 
     /**
      * Initialise ViewPager
      */
-    private void intialiseViewPager() {
+    private static final int NUM_FRAGMENTS = 3;
+    private void initialiseViewPager() {
+        List<Fragment> fragments = new ArrayList<>(NUM_FRAGMENTS);
+        for (int i = 0; i < NUM_FRAGMENTS; ++i) {
+            fragments.add(Fragment.instantiate(this, StylesFragment.class.getName()));
+        }
 
-        List<Fragment> fragments = new Vector<>();
-        fragments.add(Fragment.instantiate(this, StylesFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, StylesFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, StylesFragment.class.getName()));
         PagerAdapter mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
-        //
         this.mViewPager = (ViewPager) super.findViewById(R.id.viewpager);
         this.mViewPager.setAdapter(mPagerAdapter);
         this.mViewPager.setOnPageChangeListener(this);
@@ -114,7 +117,7 @@ public class MainActivity extends FragmentActivity
     }
 
     /**
-     * Add Tab content to the Tabhost
+     * Add Tab content to the TabHost
      *
      * @param activity the host fragment
      * @param tabHost the tab host

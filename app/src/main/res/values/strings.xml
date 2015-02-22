@@ -20,4 +20,6 @@
     <string name="tag1">#tag1</string>
     <string name="tag2">#tag2</string>
     <string name="count_ten">10</string>
+    <string name="feed">Feed</string>
+    <string name="saved">Saved</string>
 </resources>

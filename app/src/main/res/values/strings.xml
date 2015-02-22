@@ -9,4 +9,7 @@
     <string name="app_title">moa</string>
     <string name="search_icon">search_icon</string>
     <string name="search_hint">Search</string>
+    <string name="title">Title</string>
+    <string name="tag1">#tag1</string>
+    <string name="recommended_articles">Recommended Articles</string>
 </resources>

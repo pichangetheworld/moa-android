@@ -37,6 +37,16 @@ public class DescriptionActivity extends ActionBarActivity {
 
         // Show the list of related products. Clicking the product should let you buy it
         LinearLayout relatedProducts = (LinearLayout) findViewById(R.id.related_products);
+        for (int i = 0; i < relatedProducts.getChildCount(); ++i) {
+            relatedProducts.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DescriptionActivity.this, PurchaseActivity.class);
+                    // add item info
+                    startActivity(intent);
+                }
+            });
+        }
 
         TextView fromMagazine = (TextView) findViewById(R.id.from_magazine);
         String magazineName = getIntent().getStringExtra("magazine_name");

@@ -19,6 +19,7 @@ public class DescriptionActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
+        // Setting the date on the article
         TextView date = (TextView) findViewById(R.id.article_date);
         int year = getIntent().getIntExtra("year", 2015);
         int month = getIntent().getIntExtra("month", 2) - 1; // Zero indexing
@@ -28,9 +29,11 @@ public class DescriptionActivity extends ActionBarActivity {
         String strMsg = String.format(strFormat, months[month], day, year);
         date.setText(strMsg);
 
+        // Set the image for the article
         int drawable = getIntent().getIntExtra("drawable", R.drawable.index1);
         ((ImageView) findViewById(R.id.image)).setImageResource(drawable);
 
+        // Show the list of related products. Clicking the product should let you buy it
         LinearLayout relatedProducts = (LinearLayout) findViewById(R.id.related_products);
 
     }

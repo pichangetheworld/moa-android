@@ -28,7 +28,7 @@ public class StylesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        GridView v = (GridView) inflater.inflate(R.layout.grid_layout, container, false);
+        GridView v = (GridView) inflater.inflate(R.layout.feed_tab_new, container, false);
 
         v.setAdapter(new ImageAdapter(getActivity()));
 

@@ -15,6 +15,7 @@
     <string name="recommended_articles">Recommended Articles</string>
     <string name="archive">Archive</string>
     <string name="related_products">Related Products</string>
+    <string name="from_magazine_name">From %1$s</string>
 
     <!--ImageView ContentDescription-->
     <string name="image_placeholder">image</string>
@@ -24,7 +25,7 @@
     <!--String Placeholder-->
     <string name="article_title">Article Title</string>
     <string name="search_hint">Search</string>
-    <string name="description_placeholder">This is the newest in Holiday Fashion for Spring 2015! Get it while it\'s still hot.</string>
+    <string name="description_placeholder">This is the newest in Holiday Fashion for Spring 2015! Get it while it\'s hot.</string>
     <string name="magazine_name">Magazine Name</string>
     <string name="comments_placeholder">Comments</string>
     <string name="tag1">#tag1</string>
@@ -33,4 +34,5 @@
     <string name="article_date">Jan 1st, 2014</string>
     <string name="related_produce_name">Product Name</string>
     <string name="comment_good_1">This is a great article.</string>
+    <string name="comment_good_2">Absolutely stunning!</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.pichangetheworld.moasample.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,5 +38,19 @@ public class DescriptionActivity extends ActionBarActivity {
         // Show the list of related products. Clicking the product should let you buy it
         LinearLayout relatedProducts = (LinearLayout) findViewById(R.id.related_products);
 
+        TextView fromMagazine = (TextView) findViewById(R.id.from_magazine);
+        String magazineName = getIntent().getStringExtra("magazine_name");
+        if (magazineName == null) {
+            magazineName = "Magazine Name";
+        }
+        String strFromMagazine = String.format(getResources().getString(R.string.from_magazine_name), magazineName);
+        fromMagazine.setText(strFromMagazine);
+        fromMagazine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DescriptionActivity.this, MagazineActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

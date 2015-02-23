@@ -21,6 +21,9 @@
         <activity
             android:name=".activity.DescriptionActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name=".activity.MagazineActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

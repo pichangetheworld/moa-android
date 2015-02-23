@@ -8,9 +8,13 @@
     <string name="feed">Feed</string>
     <string name="saved">Saved</string>
 
+    <!--Date Format-->
+    <string name="formatted_date">%1$s %2$d, %3$d</string>
+
     <!--Titles-->
     <string name="recommended_articles">Recommended Articles</string>
     <string name="archive">Archive</string>
+    <string name="related_products">Related Products</string>
 
     <!--ImageView ContentDescription-->
     <string name="image_placeholder">image</string>
@@ -20,13 +24,13 @@
     <!--String Placeholder-->
     <string name="article_title">Article Title</string>
     <string name="search_hint">Search</string>
-    <string name="description_placeholder">Some kind of product description</string>
+    <string name="description_placeholder">This is the newest in Holiday Fashion for Spring 2015! Get it while it\'s still hot.</string>
     <string name="magazine_name">Magazine Name</string>
-    <string name="comments_placeholder">Comments…</string>
+    <string name="comments_placeholder">Comments</string>
     <string name="tag1">#tag1</string>
     <string name="tag2">#tag2</string>
     <string name="count_ten">10</string>
     <string name="article_date">Jan 1st, 2014</string>
-    <string name="related_products">Related Products</string>
     <string name="related_produce_name">Product Name</string>
+    <string name="comment_good_1">This is a great article.</string>
 </resources>

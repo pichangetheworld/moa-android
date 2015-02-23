@@ -21,10 +21,10 @@
             android:text="@string/article_date"
             android:gravity="end"/>
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/article_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title"
+            android:text="@string/article_title"
             android:textSize="48sp"
             android:textStyle="bold"
             android:layout_marginTop="-10dp"
@@ -88,37 +88,61 @@
             android:layout_height="wrap_content"
             android:text="@string/comments_placeholder" />
 
+        <TextView
+            android:id="@+id/related_products_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/related_products"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
         <LinearLayout
             android:id="@+id/related_products"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:orientation="horizontal"
-            android:layout_margin="12dp">
+            android:layout_marginBottom="12dp">
 
-            <com.pichangetheworld.moasample.view.CustomImageView
-                android:src="@drawable/gucci_bag_256"
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp" />
-            <com.pichangetheworld.moasample.view.CustomImageView
-                android:src="@drawable/gucci_bag_256"
+                android:text="@string/related_produce_name"
+                android:drawableTop="@drawable/gucci_bag_64"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                android:gravity="center"/>
+
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp" />
-            <com.pichangetheworld.moasample.view.CustomImageView
-                android:src="@drawable/gucci_bag_256"
+                android:text="@string/related_produce_name"
+                android:drawableTop="@drawable/gucci_bag_64"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                android:gravity="center"/>
+
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp" />
-            <com.pichangetheworld.moasample.view.CustomImageView
-                android:src="@drawable/gucci_bag_256"
+                android:text="@string/related_produce_name"
+                android:drawableTop="@drawable/gucci_bag_64"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                android:gravity="center"/>
+
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp" />
+                android:text="@string/related_produce_name"
+                android:drawableTop="@drawable/gucci_bag_64"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                android:gravity="center"/>
         </LinearLayout>
 
         <TextView

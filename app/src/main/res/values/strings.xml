@@ -4,6 +4,14 @@
     <string name="action_settings">Settings</string>
     <string name="app_title">moa</string>
 
+    <!--Tab Names-->
+    <string name="feed">Feed</string>
+    <string name="saved">Saved</string>
+
+    <!--Titles-->
+    <string name="recommended_articles">Recommended Articles</string>
+    <string name="archive">Archive</string>
+
     <!--ImageView ContentDescription-->
     <string name="image_placeholder">image</string>
     <string name="search_icon">search_icon</string>
@@ -12,14 +20,11 @@
     <!--String Placeholder-->
     <string name="title">Title</string>
     <string name="search_hint">Search</string>
-    <string name="archive">Archive</string>
     <string name="description_placeholder">Some kind of product description</string>
-    <string name="recommended_articles">Recommended Articles</string>
     <string name="magazine_name">Magazine Name</string>
     <string name="comments_placeholder">Comments…</string>
     <string name="tag1">#tag1</string>
     <string name="tag2">#tag2</string>
     <string name="count_ten">10</string>
-    <string name="feed">Feed</string>
-    <string name="saved">Saved</string>
+    <string name="article_date">Jan 1st, 2014</string>
 </resources>

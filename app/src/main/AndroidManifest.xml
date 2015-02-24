@@ -44,6 +44,9 @@
         <activity
             android:name=".activity.PurchaseActivity"
             android:label="@string/app_name" />
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="186e092fce24837e8e6db4d83a30d79381d6a105" />
     </application>
 
 </manifest>

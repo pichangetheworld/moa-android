@@ -7,6 +7,10 @@
     <!--Facebook App Id-->
     <string name="facebook_app_id">1395271860786033</string>
 
+    <!--Twitter Id-->
+    <string name="twitter_api_key">FZNg3owohTlgdfHf8RHR6waYj</string>
+    <string name="twitter_api_secret">eNIpIfBPjJbzsCM4CwyqnspPNEl8utPXILH0fvCMhdEWteP4Y6</string>
+
     <!--Sign in Button Name-->
     <string name="sign_in_google">Sign in with Google+</string>
 

@@ -15,7 +15,6 @@ import com.facebook.AppEventsLogger;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.LoginButton;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
@@ -26,6 +25,15 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.pichangetheworld.moasample.R;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,6 +68,9 @@ public class SigninActivity extends Activity implements
         }
     };
 
+    /* Client used to interact with Twitter APIs. */
+    private TwitterLoginButton twitterAuthButton;
+
     // We use mSignInProgress to track whether user has clicked sign in.
     // mSignInProgress can be one of three values:
     //
@@ -85,11 +96,11 @@ public class SigninActivity extends Activity implements
     // services until the user clicks 'sign in'.
     private PendingIntent mSignInIntent;
 
-    private static final String CLIENT_ID =
+    private static final String GOOGLE_CLIENT_ID =
             "477431187441-kcg0oomusv8d7bl1qqlp56ve6kb46tlq.apps.googleusercontent.com";
 
     // Scope for AuthUtil.getToken()
-    private static final String SCOPE = "audience:server:client_id:" + CLIENT_ID;
+    private static final String SCOPE = "audience:server:client_id:" + GOOGLE_CLIENT_ID;
     private ProgressBar mProgressBar;
 
 
@@ -121,7 +132,28 @@ public class SigninActivity extends Activity implements
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
 
-        LoginButton facebookAuthButton = (LoginButton) findViewById(R.id.signin_facebook);
+//        LoginButton facebookAuthButton = (LoginButton) findViewById(R.id.signin_facebook);
+
+        // Sign in with Twitter
+        String consumerKey = getResources().getString(R.string.twitter_api_key);
+        String consumerSecret = getResources().getString(R.string.twitter_api_secret);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(consumerKey, consumerSecret);
+        Fabric.with(this, new Twitter(authConfig));
+
+        twitterAuthButton = (TwitterLoginButton) findViewById(R.id.signin_twitter);
+        twitterAuthButton.setEnabled(true);
+        twitterAuthButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // Do something with result, which provides a
+                // TwitterSession for making API calls
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+            }
+        });
     }
 
     private GoogleApiClient buildGoogleApiClient() {
@@ -270,6 +302,9 @@ public class SigninActivity extends Activity implements
             }
         }
         uiHelper.onActivityResult(requestCode, resultCode, data);
+        // Pass the activity result to the login button.
+        twitterAuthButton.onActivityResult(requestCode, resultCode,
+                data);
     }
 
     // User has successfully signed in to Google+
@@ -328,12 +363,17 @@ public class SigninActivity extends Activity implements
 
     // Update UI based on whether user is signed into Facebook or not
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        Log.d("SigninActivity", "Session " + session.toString());
+        if (exception != null) {
+            exception.printStackTrace();
+        }
         if (state.isOpened()) {
             Log.i("MainActivity", "Logged in...");
         } else if (state.isClosed()) {
             Log.i("MainActivity", "Logged out...");
         }
     }
+
     // Once user has signed in with Google/Facebook/Twitter, they can then sign in to our server
     private void signInToServer(String id, String token, final String name, final String imageUrl) {
         Log.d("StartActivity", "Signing in to server " + id + " name:" + name + " image:" + imageUrl);
@@ -382,7 +422,6 @@ public class SigninActivity extends Activity implements
 //                        private void onFailResponse(int statusCode) {
 //                            mProgressBar.setVisibility(View.GONE);
 //                            switch (statusCode) {
-//                                // TODO handle timeout error, invalid user error
 //                                default:
 //                                    Log.e("Signin", "Failed with error code: " + statusCode);
 //                            }

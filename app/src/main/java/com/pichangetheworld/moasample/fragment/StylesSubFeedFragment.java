@@ -19,7 +19,7 @@ import com.pichangetheworld.moasample.view.CustomImageView;
  * Author: pchan
  * Date: 18/02/2015
  */
-public class StylesFragment extends Fragment {
+public class StylesSubFeedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

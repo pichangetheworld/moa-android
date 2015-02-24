@@ -87,7 +87,7 @@ public class FeedFragment extends Fragment implements
     private void initialiseViewPager(View v) {
         List<Fragment> fragments = new ArrayList<>(NUM_FRAGMENTS);
         for (int i = 0; i < NUM_FRAGMENTS; ++i) {
-            fragments.add(Fragment.instantiate(getActivity(), StylesFragment.class.getName()));
+            fragments.add(Fragment.instantiate(getActivity(), StylesSubFeedFragment.class.getName()));
         }
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), fragments);

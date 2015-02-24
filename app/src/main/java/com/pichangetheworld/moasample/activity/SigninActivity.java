@@ -101,11 +101,12 @@ public class SigninActivity extends Activity implements
     // services until the user clicks 'sign in'.
     private PendingIntent mSignInIntent;
 
-    private static final String GOOGLE_CLIENT_ID =
+    // TODO set this to the actual server id as shown on developers console
+    private static final String GOOGLE_SERVER_CLIENT_ID =
             "477431187441-kcg0oomusv8d7bl1qqlp56ve6kb46tlq.apps.googleusercontent.com";
 
     // Scope for AuthUtil.getToken()
-    private static final String SCOPE = "audience:server:client_id:" + GOOGLE_CLIENT_ID;
+    private static final String SCOPE = "audience:server:client_id:" + GOOGLE_SERVER_CLIENT_ID;
     private ProgressBar mProgressBar;
 
 
@@ -173,6 +174,7 @@ public class SigninActivity extends Activity implements
     protected void onStart() {
         Log.d("StartActivity", "onStart");
         super.onStart();
+        mProgressBar.setVisibility(View.VISIBLE);
         mGoogleApiClient.connect();
     }
 
@@ -251,7 +253,11 @@ public class SigninActivity extends Activity implements
                 // so we should continue processing errors until the user is signed in
                 // or they click cancel.
                 resolveSignInError();
+            } else {
+                mProgressBar.setVisibility(View.GONE);
             }
+        } else {
+            mProgressBar.setVisibility(View.GONE);
         }
     }
 

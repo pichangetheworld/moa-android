@@ -24,21 +24,20 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.pichangetheworld.moasample.R;
-
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * MoaSample
@@ -49,6 +48,11 @@ public class SigninActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "rAyk8BAqujG8ZWxGb1tS6qSll";
+    private static final String TWITTER_SECRET = "oHwNuRM0vHzd3T2jIC5FbW9NgGC4dsr52YtfJei58GDnEQ99Hz";
+
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 902;
 
@@ -135,25 +139,15 @@ public class SigninActivity extends Activity implements
 
 //        LoginButton facebookAuthButton = (LoginButton) findViewById(R.id.signin_facebook);
 
-        // Sign in with Twitter
-        String consumerKey = getResources().getString(R.string.twitter_api_key);
-        String consumerSecret = getResources().getString(R.string.twitter_api_secret);
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(consumerKey, consumerSecret);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
 
         twitterAuthButton = (TwitterLoginButton) findViewById(R.id.signin_twitter);
-        twitterAuthButton.setEnabled(true);
         twitterAuthButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 // Do something with result, which provides a
                 // TwitterSession for making API calls
-                TwitterSession session =
-                        Twitter.getSessionManager().getActiveSession();
-                TwitterAuthToken authToken = session.getAuthToken();
-                String token = authToken.token;
-                String secret = authToken.secret;
-                Log.d("SigninActivity", "Twitter sign in token:" + token + " secret:" + secret);
             }
 
             @Override

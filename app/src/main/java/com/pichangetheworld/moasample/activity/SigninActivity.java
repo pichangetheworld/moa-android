@@ -50,11 +50,11 @@ public class SigninActivity extends Activity implements
         View.OnClickListener {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "rAyk8BAqujG8ZWxGb1tS6qSll";
-    private static final String TWITTER_SECRET = "oHwNuRM0vHzd3T2jIC5FbW9NgGC4dsr52YtfJei58GDnEQ99Hz";
+    private static final String TWITTER_KEY = "HC1SLGMzcFO2eTFSmdfClW2iX";
+    private static final String TWITTER_SECRET = "PfHdiIa27jgINccMzNUT55adCk2iTQgH6Tx9gv58Af5g09VMwo";
 
     /* Request code used to invoke sign in user interactions. */
-    private static final int RC_SIGN_IN = 902;
+    private static final int GOOGLE_SIGN_IN_RC = 902;
 
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
@@ -270,7 +270,7 @@ public class SigninActivity extends Activity implements
                 // Google Play services.
                 mSignInProgress = STATE_IN_PROGRESS;
                 startIntentSenderForResult(mSignInIntent.getIntentSender(),
-                        RC_SIGN_IN, null, 0, 0, 0);
+                        GOOGLE_SIGN_IN_RC, null, 0, 0, 0);
             } catch (IntentSender.SendIntentException e) {
                 Log.i("StartActivity", "Sign in intent could not be sent: "
                         + e.getLocalizedMessage());
@@ -285,7 +285,7 @@ public class SigninActivity extends Activity implements
     // Capture the result for onConnectionFailed, above
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == GOOGLE_SIGN_IN_RC) {
             Log.d("StartActivity", "OnActivityResult result " + resultCode);
             if (resultCode == RESULT_OK) {
                 // If the error resolution was successful we should continue
@@ -343,7 +343,7 @@ public class SigninActivity extends Activity implements
                         // getIntent()
                         SigninActivity.this.startActivityForResult(
                                 userAuthEx.getIntent(),
-                                RC_SIGN_IN);
+                                GOOGLE_SIGN_IN_RC);
                     } catch (IOException e) {
                         // network or server error, the call is expected to succeed if you try again later.
                         // Don't attempt to call again immediately - the request is likely to

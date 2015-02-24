@@ -29,6 +29,7 @@ import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
@@ -147,6 +148,12 @@ public class SigninActivity extends Activity implements
             public void success(Result<TwitterSession> result) {
                 // Do something with result, which provides a
                 // TwitterSession for making API calls
+                TwitterSession session =
+                        Twitter.getSessionManager().getActiveSession();
+                TwitterAuthToken authToken = session.getAuthToken();
+                String token = authToken.token;
+                String secret = authToken.secret;
+                Log.d("SigninActivity", "Twitter sign in token:" + token + " secret:" + secret);
             }
 
             @Override

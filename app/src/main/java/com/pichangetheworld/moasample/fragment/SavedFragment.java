@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import java.util.List;
  * Author: pchan
  * Date: 18/02/2015
  */
-public class FeedFragment extends Fragment implements
+public class SavedFragment extends Fragment implements
         TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class FeedFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_feed, container, false);
+        View v = inflater.inflate(R.layout.fragment_saved, container, false);
 
         // Initialise the TabHost
         this.initialiseTabHost(v);
@@ -44,14 +43,8 @@ public class FeedFragment extends Fragment implements
 
         return v;
     }
-
     private TabHost mTabHost;
     private ViewPager mViewPager;
-
-    // Getter
-    public String getCurrentTabTag() {
-        return mTabHost.getCurrentTabTag();
-    }
 
     /**
      * A simple factory that returns dummy views to the TabHost
@@ -71,7 +64,7 @@ public class FeedFragment extends Fragment implements
         /**
          * (non-Javadoc)
          *
-         * @see android.widget.TabHost.TabContentFactory#createTabContent(java.lang.String)
+         * @see android.widget.TabHost.TabContentFactory#createTabContent(String)
          */
         public View createTabContent(String tag) {
             View v = new View(mContext);
@@ -84,11 +77,11 @@ public class FeedFragment extends Fragment implements
     /**
      * Initialise ViewPager
      */
-    private static final int NUM_FRAGMENTS = 3;
+    private static final int NUM_FRAGMENTS = 4;
     private void initialiseViewPager(View v) {
         List<Fragment> fragments = new ArrayList<>(NUM_FRAGMENTS);
         for (int i = 0; i < NUM_FRAGMENTS; ++i) {
-            fragments.add(Fragment.instantiate(getActivity(), StylesSubFeedFragment.class.getName()));
+            fragments.add(Fragment.instantiate(getActivity(), SeasonsSubSavedFragment.class.getName()));
         }
 
         PagerAdapter mPagerAdapter = new PagerAdapter(getChildFragmentManager(), fragments);
@@ -101,14 +94,15 @@ public class FeedFragment extends Fragment implements
      * Initialise the Tab Host
      */
     private void initialiseTabHost(View v) {
-        Log.d("FeedFragment", "Initialising Tab Host");
         mTabHost = (TabHost) v.findViewById(android.R.id.tabhost);
         mTabHost.setup();
-        mTabHost.addTab(this.mTabHost.newTabSpec("New").setIndicator("New")
+        mTabHost.addTab(this.mTabHost.newTabSpec("Spring").setIndicator("Spring")
                 .setContent(new TabFactory(getActivity())));
-        mTabHost.addTab(this.mTabHost.newTabSpec("Top").setIndicator("Top")
+        mTabHost.addTab(this.mTabHost.newTabSpec("Summer").setIndicator("Summer")
                 .setContent(new TabFactory(getActivity())));
-        mTabHost.addTab(this.mTabHost.newTabSpec("Trending").setIndicator("Trending")
+        mTabHost.addTab(this.mTabHost.newTabSpec("Fall").setIndicator("Fall")
+                .setContent(new TabFactory(getActivity())));
+        mTabHost.addTab(this.mTabHost.newTabSpec("Winter").setIndicator("Winter")
                 .setContent(new TabFactory(getActivity())));
 
         mTabHost.setOnTabChangedListener(this);
@@ -117,7 +111,7 @@ public class FeedFragment extends Fragment implements
     /**
      * (non-Javadoc)
      *
-     * @see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
+     * @see android.widget.TabHost.OnTabChangeListener#onTabChanged(String)
      */
     public void onTabChanged(String tag) {
         int pos = this.mTabHost.getCurrentTab();

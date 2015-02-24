@@ -19,6 +19,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="5dp">
         <TextView
+            android:id="@+id/feed_tab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,6 +28,7 @@
             android:textColor="@color/white"
             android:gravity="center"/>
         <TextView
+            android:id="@+id/saved_tab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

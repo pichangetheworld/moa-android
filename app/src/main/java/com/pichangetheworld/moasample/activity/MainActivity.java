@@ -10,9 +10,12 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.pichangetheworld.moasample.R;
 import com.pichangetheworld.moasample.fragment.FeedFragment;
+import com.pichangetheworld.moasample.fragment.SavedFragment;
 
 /**
  * MAO
@@ -21,8 +24,17 @@ import com.pichangetheworld.moasample.fragment.FeedFragment;
  */
 public class MainActivity extends ActionBarActivity {
     final Fragment FRAGMENTS[] = {
-            new FeedFragment()
+            new FeedFragment(),
+            new SavedFragment()
     };
+
+    final int[] TAB_VIEWS = {
+            R.id.feed_tab,
+            R.id.saved_tab
+    };
+
+    TextView[] tabs = new TextView[4];
+    int curSelected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +44,33 @@ public class MainActivity extends ActionBarActivity {
         FragmentTransaction ft =
                 getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragment_container, FRAGMENTS[0]);
+        ft.commit();
+
+        for (int i = 0; i < TAB_VIEWS.length; ++i) {
+            tabs[i] = (TextView) findViewById(TAB_VIEWS[i]);
+            tabs[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectTab(v);
+                }
+            });
+        }
+        tabs[0].setEnabled(false);
+    }
+
+    private void selectTab(View v) {
+        int index;
+        for (index = 0; index < tabs.length; ++index) {
+            if (tabs[index] == v) break;
+        }
+
+        tabs[curSelected].setEnabled(true);
+        curSelected = index;
+        tabs[curSelected].setEnabled(false);
+
+        FragmentTransaction ft =
+                getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, FRAGMENTS[curSelected]);
         ft.commit();
     }
 

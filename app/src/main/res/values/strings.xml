@@ -1,8 +1,14 @@
 <resources>
-    <string name="app_name">Moa</string>
+    <string name="app_name">moa</string>
 
     <string name="action_settings">Settings</string>
     <string name="app_title">moa</string>
+
+    <!--Facebook App Id-->
+    <string name="facebook_app_id">1395271860786033</string>
+
+    <!--Sign in Button Name-->
+    <string name="sign_in_google">Sign in with Google+</string>
 
     <!--Tab Names-->
     <string name="feed">Feed</string>

@@ -9,11 +9,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.facebook.AppEventsLogger;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LoginButton;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
@@ -38,6 +45,20 @@ public class SigninActivity extends Activity implements
 
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
+
+    /* Client used to interact with Facebook APIs. */
+    private UiLifecycleHelper uiHelper;
+
+    // Callback after successful Facebook Signin
+    private Session.StatusCallback callback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            if (exception != null) {
+                exception.printStackTrace();
+            }
+            onSessionStateChange(session, state, exception);
+        }
+    };
 
     // We use mSignInProgress to track whether user has clicked sign in.
     // mSignInProgress can be one of three values:
@@ -77,22 +98,30 @@ public class SigninActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-//        Button btn2 = (Button) findViewById(R.id.tutorial_button);
-//        btn2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TutorialFragment dialog = new TutorialFragment();
-//                dialog.show(getSupportFragmentManager(), "Tutorial");
-//            }
-//        });
-
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.GONE);
 
         // Sign in with Google+ button
-        findViewById(R.id.signin_google).setOnClickListener(this);
+        SignInButton googleAuthButton = (SignInButton) findViewById(R.id.signin_google);
+        googleAuthButton.setOnClickListener(this);
+        for (int i = 0; i < googleAuthButton.getChildCount(); i++) {
+            View v = googleAuthButton.getChildAt(i);
+
+            if (v instanceof TextView) {
+                TextView tv = (TextView) v;
+                tv.setText(R.string.sign_in_google);
+                tv.setTextSize(17f);
+                break;
+            }
+        }
 
         mGoogleApiClient = buildGoogleApiClient();
+
+        // Set up UI Helper for FB
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
+
+        LoginButton facebookAuthButton = (LoginButton) findViewById(R.id.signin_facebook);
     }
 
     private GoogleApiClient buildGoogleApiClient() {
@@ -121,6 +150,30 @@ public class SigninActivity extends Activity implements
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
     }
 
     // Called if the application loses service connection
@@ -216,9 +269,10 @@ public class SigninActivity extends Activity implements
                 mGoogleApiClient.connect();
             }
         }
+        uiHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-    // User has successfully signed in
+    // User has successfully signed in to Google+
     @Override
     public void onConnected(Bundle bundle) {
         Log.d("StartActivity", "Successfully signed in! Getting me data");
@@ -272,6 +326,15 @@ public class SigninActivity extends Activity implements
         }
     }
 
+    // Update UI based on whether user is signed into Facebook or not
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            Log.i("MainActivity", "Logged in...");
+        } else if (state.isClosed()) {
+            Log.i("MainActivity", "Logged out...");
+        }
+    }
+    // Once user has signed in with Google/Facebook/Twitter, they can then sign in to our server
     private void signInToServer(String id, String token, final String name, final String imageUrl) {
         Log.d("StartActivity", "Signing in to server " + id + " name:" + name + " image:" + imageUrl);
 

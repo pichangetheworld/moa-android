@@ -17,6 +17,8 @@
     <!--Tab Names-->
     <string name="feed">Feed</string>
     <string name="saved">Saved</string>
+    <string name="chat">Chat</string>
+    <string name="settings">Settings</string>
 
     <!--Date Format-->
     <string name="formatted_date">%1$s %2$d, %3$d</string>

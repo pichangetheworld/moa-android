@@ -38,16 +38,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/feed_icon"
-            android:text="@string/feed"
+            android:drawableTop="@drawable/chat_icon"
+            android:text="@string/chat"
             android:textColor="@color/white"
             android:gravity="center"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/heart"
-            android:text="@string/saved"
+            android:drawableTop="@drawable/settings_icon"
+            android:text="@string/settings"
             android:textColor="@color/white"
             android:gravity="center"/>
     </LinearLayout>

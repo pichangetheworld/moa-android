@@ -21,7 +21,7 @@ import java.util.List;
  * Author: pchan
  * Date: 18/02/2015
  */
-public class FeedFragment extends Fragment implements
+public class FeedFragment extends TabFragment implements
         TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,10 @@ public class FeedFragment extends Fragment implements
 
         // Initialise the TabHost
         this.initialiseTabHost(v);
-//        if (savedInstanceState != null) {
-//            // Set the tab as per the saved state
-//            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
-//        }
+        if (savedInstanceState != null) {
+            // Set the tab as per the saved state
+            mTabHost.setCurrentTabByTag(savedInstanceState.getString("feed"));
+        }
         // Initialise ViewPager
         this.initialiseViewPager(v);
 

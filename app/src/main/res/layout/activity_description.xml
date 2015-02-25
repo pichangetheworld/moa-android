@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tag1"
-                android:background="#ffc6c6c6"
+                android:background="@color/tag_color"
                 android:padding="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"/>
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tag2"
-                android:background="#ffc6c6c6"
+                android:background="@color/tag_color"
                 android:padding="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"/>
@@ -176,7 +176,7 @@
             android:text="@string/from_magazine_name"
             android:textSize="24sp"
             android:background="#ff5f5f5f"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:padding="12dp"
             android:gravity="center_horizontal"/>
 

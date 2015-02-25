@@ -46,7 +46,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:textSize="20sp"
-            android:textColor="#ff0000"/>
+            android:textColor="@color/purchase_price_text_color"/>
     </LinearLayout>
 
 </LinearLayout>

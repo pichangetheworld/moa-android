@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -80,14 +79,9 @@ public class MainActivity extends ActionBarActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
 
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        Log.d("MainActivity", "Searching in menu for menuview " +
-                menu.findItem(R.id.action_search).getActionView());
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         return super.onCreateOptionsMenu(menu);
     }

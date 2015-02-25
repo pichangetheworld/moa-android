@@ -113,6 +113,11 @@ public class SigninActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Need to initialize Fabric before making a Twitter instance
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
+
         setContentView(R.layout.activity_signin);
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -139,9 +144,6 @@ public class SigninActivity extends Activity implements
         uiHelper.onCreate(savedInstanceState);
 
 //        LoginButton facebookAuthButton = (LoginButton) findViewById(R.id.signin_facebook);
-
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
 
         twitterAuthButton = (TwitterLoginButton) findViewById(R.id.signin_twitter);
         twitterAuthButton.setCallback(new Callback<TwitterSession>() {

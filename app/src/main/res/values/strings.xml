@@ -30,6 +30,7 @@
     <string name="image_placeholder">image</string>
     <string name="search_icon">search_icon</string>
     <string name="hearts">hearts</string>
+    <string name="commenter_pic">commenter profile</string>
 
     <!--String Placeholder-->
     <string name="article_title">Article Title</string>
@@ -45,4 +46,5 @@
     <string name="comment_good_1">This is a great article.</string>
     <string name="comment_good_2">Absolutely stunning!</string>
     <string name="sample_price">$%1$d.%2$d</string>
+    <string name="add_comment_hint">Add your comment here</string>
 </resources>

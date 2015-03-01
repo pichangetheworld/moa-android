@@ -158,6 +158,15 @@ public class SigninActivity extends Activity implements
                 // Do something on failure
             }
         });
+
+        findViewById(R.id.temp_skip_button).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        signInToServer("", "", "", "");
+                    }
+                }
+        );
     }
 
     private GoogleApiClient buildGoogleApiClient() {

@@ -34,6 +34,15 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="30dp" />
 
+    <Button
+        android:id="@+id/temp_skip_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signin_twitter"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:text="Skip"/>
+
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
